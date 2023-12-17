@@ -4,7 +4,7 @@ from ..models.transacao_model import TransacaoModel
 
 class TransacaoService:
     def processar_transacao(self, nova_transacao, ticker_existente=None):
-        if nova_transacao.get('operacao') == 'Compra':
+        if nova_transacao.get('operacao') == 'compra':
 
             quantidade = Decimal(str(nova_transacao.get('quantidade', 0)))
             preco_unitario = Decimal(str(nova_transacao.get('preco_unitario', 0)))
@@ -30,7 +30,7 @@ class TransacaoService:
             mensagem = f"Transação de compra criada com sucesso, ID: {response.id}"
             return {"message": mensagem}, 201
 
-        elif nova_transacao.get('operacao') == 'Venda':
+        elif nova_transacao.get('operacao') == 'venda':
             quantidade = Decimal(str(nova_transacao.get('quantidade', 0)))
             response = TransacaoModel(
                 ticker=nova_transacao.get('ticker'),

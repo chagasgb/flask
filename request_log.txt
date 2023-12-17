@@ -1,0 +1,39 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  1191  100   873  100   318  72750  26500 --:--:-- --:--:-- --:--:-- 99250
+{
+    "tickers_adicionados": [
+        "ITSA4",
+        "OIBR3"
+    ],
+    "transacoes_registradas": [
+        {
+            "ticker": "ITSA4",
+            "operacao": "compra",
+            "quantidade": 1.0,
+            "preco_unitario": 9.67,
+            "valor_operacao": 9.67
+        },
+        {
+            "ticker": "OIBR3",
+            "operacao": "compra",
+            "quantidade": 1.0,
+            "preco_unitario": 9.67,
+            "valor_operacao": 9.67
+        }
+    ],
+    "respostas_processamento": [
+        [
+            {
+                "message": "Transa\u00e7\u00e3o de compra criada com sucesso, ID: 657f3bba8bc7ca57de33d3fa"
+            },
+            201
+        ],
+        [
+            {
+                "message": "Transa\u00e7\u00e3o de compra criada com sucesso, ID: 657f3bba8bc7ca57de33d3fb"
+            },
+            201
+        ]
+    ]
+}

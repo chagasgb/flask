@@ -6,80 +6,85 @@ from ..services.transacao_service import TransacaoService
 
 class IngestData(Resource):
     def post(self):
-        json_payload = request.get_data(as_text=True)
-
-        if not json_payload:
-            return {"message": "Dados JSON não fornecidos no payload"}, 400
-
         try:
-            data = json.loads(json_payload)
-        except json.JSONDecodeError as e:
-            return {"message": f"Erro ao decodificar JSON: {str(e)}"}, 400
+            # Use request.get_json() para obter diretamente o JSON do corpo da solicitação
+            data = request.get_json()
 
-        tickers_adicionados = []
-        tickers_no_mesmo_payload = set()
-        transacoes_registradas = []
+            if not data:
+                return {"message": "Dados JSON não fornecidos no payload"}, 400
 
-        for entry in data:
-            ticker = entry.get("ticker")
+            tickers_adicionados = set()
+            transacoes_registradas = []
 
-            if not ticker:
-                print("Erro: Ticker não encontrado no objeto JSON.")
-                continue
+            for entry in data:
+                if not isinstance(entry, dict):
+                    print(f"Erro: Entrada inválida no objeto JSON: {entry}")
+                    continue
 
-            existing_ativo = AtivosModel.objects(ticker=ticker).first()
+                ticker = entry.get("ticker")
+                classe = entry.get("classe")
 
-            if ticker in tickers_no_mesmo_payload:
-                continue
+                if not ticker:
+                    print("Erro: Ticker não encontrado no objeto JSON.")
+                    continue
 
-            if not existing_ativo:
-                self.adicionar_ativo(ticker, entry.get("classe"), tickers_adicionados, tickers_no_mesmo_payload)
-                
-            self.adicionar_transacao(ticker, entry, transacoes_registradas)
+                existing_ativo = AtivosModel.objects(ticker=ticker).first()
 
-        # Após o loop, processar as transações
-        transacao_service = TransacaoService()
-        respostas = [transacao_service.processar_transacao(transacao, AtivosModel.objects(ticker=transacao["ticker"]).first()) 
-                     for transacao in transacoes_registradas]
+                if not existing_ativo and ticker not in tickers_adicionados:
+                    self.adicionar_ativo(ticker, classe, tickers_adicionados)
 
-        return {
-            "tickers_adicionados": tickers_adicionados,
-            "transacoes_registradas": transacoes_registradas,
-            "respostas_processamento": respostas
-        }, 201
+                transacao = self.adicionar_transacao(ticker, entry)
 
+                if transacao:
+                    transacoes_registradas.append(transacao)
 
+            # Após o loop, processar as transações
+            transacao_service = TransacaoService()
+            respostas = [transacao_service.processar_transacao(
+                transacao, 
+                AtivosModel.objects(ticker=transacao["ticker"]).first() if "ticker" in transacao else None
+            ) for transacao in transacoes_registradas]
 
-    def adicionar_ativo(self, ticker, classe, tickers_adicionados, tickers_no_mesmo_payload):
+            return {
+                "tickers_adicionados": list(tickers_adicionados),
+                "transacoes_registradas": transacoes_registradas,
+                "respostas_processamento": respostas
+            }, 201
+
+        except ValueError:
+            return {"message": "Erro: JSON inválido no payload"}, 400
+        except Exception as e:
+            return {"message": f"Erro ao ingerir dados: {str(e)}"}, 500
+
+    def adicionar_ativo(self, ticker, classe, tickers_adicionados):
         novo_ativo = AtivosModel(ticker=ticker, classe=classe)
         try:
             novo_ativo.save()
-            tickers_adicionados.append(ticker)
-            tickers_no_mesmo_payload.add(ticker)
+            tickers_adicionados.add(ticker)
             print(f"Ativo {ticker} registrado com sucesso.")
         except Exception as e:
             print(f"Erro ao adicionar ativo {ticker}: {str(e)}")
 
-
-    def adicionar_transacao(self, ticker, entry, transacoes_registradas):
-        nova_transacao = TransacaoModel(
-            ticker=ticker,
-            operacao=entry.get("operacao"),
-            quantidade=entry.get("quantidade", 0.0),
-            preco_unitario=entry.get("preco_unitario", 0.0),
-            valor_operacao=entry.get("valor_operacao", 0.0)
-        )
-
+    def adicionar_transacao(self, ticker, entry):
         try:
+            nova_transacao = TransacaoModel(
+                ticker=ticker,
+                operacao=entry.get("operacao"),
+                quantidade=entry.get("quantidade", 0.0),
+                preco_unitario=entry.get("preco_unitario", 0.0),
+                valor_operacao=entry.get("valor_operacao", 0.0)
+            )
+
             nova_transacao.save()
-            transacoes_registradas.append({
+
+            return {
                 "ticker": nova_transacao.ticker,
                 "operacao": nova_transacao.operacao,
-                "quantidade": nova_transacao.quantidade,
-                "preco_unitario": nova_transacao.preco_unitario,
-                "valor_operacao": nova_transacao.valor_operacao
-            })
+                "quantidade": float(nova_transacao.quantidade),
+                "preco_unitario": float(nova_transacao.preco_unitario),
+                "valor_operacao": float(nova_transacao.valor_operacao)
+            }
 
-            print(f"Transação para {ticker} registrada com sucesso.")
         except Exception as e:
             print(f"Erro ao registrar transação para {ticker}: {str(e)}")
+            return None
