@@ -1,0 +1,18 @@
+ticker,operacao,classe,quantidade,preco_unitario,valor_operacao
+OIBR3,Compra,acao,34,1,34
+ITSA4,Compra,acao,1,"13,87","13,87"
+OIBR3,Venda,acao,100,"1,02",102
+SPTW11,Compra,fundo imobiliario,1,"98,6","98,6"
+BCFF11,Compra,fundo imobiliario,2,"113,55","227,1"
+SPTW11,Compra,fundo imobiliario,1,97,97
+SPTW11,Compra,fundo imobiliario,1,"82,5","82,5"
+ITSA4,Venda,acao,1,"13,4","13,4"
+SPTW11,Venda,fundo imobiliario,3,"91,52","274,56"
+OIBR3,Venda,acao,24,"0,89","17,8"
+BCFF11,Compra,fundo imobiliario,1,"113,74","113,74"
+MXRF11,Compra,fundo imobiliario,2,"12,72","25,44"
+VISC11,Compra,fundo imobiliario,1,"139,68","139,68"
+VISC11,Venda,fundo imobiliario,1,"135,25","135,25"
+BCFF11,Compra,fundo imobiliario,1,"100,04","100,04"
+MXRF11,Compra,fundo imobiliario,4,"11,42","45,68"
+TIMP3,Compra,acao,2,"17,46","34,92"

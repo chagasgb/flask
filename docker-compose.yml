@@ -1,13 +1,16 @@
-version: '3.9'
+version: '3.3'
 
 services:
 
   mongodb:
     image: mongo:5.0.8
+    restart: always
     container_name: mongodb
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
+    networks:
+      - chagas-lab
 
   api:
     build:
@@ -21,4 +24,9 @@ services:
       - mongodb
     volumes:
       - ./application:/app/application
-  
+    networks:
+      - chagas-lab
+
+networks:
+  chagas-lab:
+    external: true

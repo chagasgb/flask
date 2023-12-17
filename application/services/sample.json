@@ -1,0 +1,138 @@
+[
+    {
+        "ticker": "OIBR3",
+        "operacao": "Compra",
+        "classe": "acao",
+        "quantidade": "34",
+        "preco_unitario": "1",
+        "valor_operacao": "34"
+    },
+    {
+        "ticker": "ITSA4",
+        "operacao": "Compra",
+        "classe": "acao",
+        "quantidade": "1",
+        "preco_unitario": "13,87",
+        "valor_operacao": "13,87"
+    },
+    {
+        "ticker": "OIBR3",
+        "operacao": "Venda",
+        "classe": "acao",
+        "quantidade": "100",
+        "preco_unitario": "1,02",
+        "valor_operacao": "102"
+    },
+    {
+        "ticker": "SPTW11",
+        "operacao": "Compra",
+        "classe": "fundo imobiliario",
+        "quantidade": "1",
+        "preco_unitario": "98,6",
+        "valor_operacao": "98,6"
+    },
+    {
+        "ticker": "BCFF11",
+        "operacao": "Compra",
+        "classe": "fundo imobiliario",
+        "quantidade": "2",
+        "preco_unitario": "113,55",
+        "valor_operacao": "227,1"
+    },
+    {
+        "ticker": "SPTW11",
+        "operacao": "Compra",
+        "classe": "fundo imobiliario",
+        "quantidade": "1",
+        "preco_unitario": "97",
+        "valor_operacao": "97"
+    },
+    {
+        "ticker": "SPTW11",
+        "operacao": "Compra",
+        "classe": "fundo imobiliario",
+        "quantidade": "1",
+        "preco_unitario": "82,5",
+        "valor_operacao": "82,5"
+    },
+    {
+        "ticker": "ITSA4",
+        "operacao": "Venda",
+        "classe": "acao",
+        "quantidade": "1",
+        "preco_unitario": "13,4",
+        "valor_operacao": "13,4"
+    },
+    {
+        "ticker": "SPTW11",
+        "operacao": "Venda",
+        "classe": "fundo imobiliario",
+        "quantidade": "3",
+        "preco_unitario": "91,52",
+        "valor_operacao": "274,56"
+    },
+    {
+        "ticker": "OIBR3",
+        "operacao": "Venda",
+        "classe": "acao",
+        "quantidade": "24",
+        "preco_unitario": "0,89",
+        "valor_operacao": "17,8"
+    },
+    {
+        "ticker": "BCFF11",
+        "operacao": "Compra",
+        "classe": "fundo imobiliario",
+        "quantidade": "1",
+        "preco_unitario": "113,74",
+        "valor_operacao": "113,74"
+    },
+    {
+        "ticker": "MXRF11",
+        "operacao": "Compra",
+        "classe": "fundo imobiliario",
+        "quantidade": "2",
+        "preco_unitario": "12,72",
+        "valor_operacao": "25,44"
+    },
+    {
+        "ticker": "VISC11",
+        "operacao": "Compra",
+        "classe": "fundo imobiliario",
+        "quantidade": "1",
+        "preco_unitario": "139,68",
+        "valor_operacao": "139,68"
+    },
+    {
+        "ticker": "VISC11",
+        "operacao": "Venda",
+        "classe": "fundo imobiliario",
+        "quantidade": "1",
+        "preco_unitario": "135,25",
+        "valor_operacao": "135,25"
+    },
+    {
+        "ticker": "BCFF11",
+        "operacao": "Compra",
+        "classe": "fundo imobiliario",
+        "quantidade": "1",
+        "preco_unitario": "100,04",
+        "valor_operacao": "100,04"
+    },
+    {
+        "ticker": "MXRF11",
+        "operacao": "Compra",
+        "classe": "fundo imobiliario",
+        "quantidade": "4",
+        "preco_unitario": "11,42",
+        "valor_operacao": "45,68"
+    },
+    {
+        "ticker": "TIMP3",
+        "operacao": "Compra",
+        "classe": "acao",
+        "quantidade": "2",
+        "preco_unitario": "17,46",
+        "valor_operacao": "34,92"
+    }
+]

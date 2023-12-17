@@ -1,7 +1,14 @@
 from flask import Flask
-from flask_restful import Api
+from flask_restful import Api, Resource
 from .db import init_db
-from .app import User, Users
+from .controllers.transacao_controller import TransacaoController
+from .controllers.ativos_controller import AtivosController
+from .services.data_ingest import IngestData
+
+
+class ConnectionResource(Resource):
+    def get(self):
+        return {'message': 'Conexão bem-sucedida!'}, 200
 
 def create_app(config):
     app = Flask(__name__)
@@ -9,6 +16,13 @@ def create_app(config):
     app.config.from_object(config)
     init_db(app)
 
-    api.add_resource(Users, '/users')
-    api.add_resource(User, '/user', '/user/<string:codigo>')
+    api.add_resource(TransacaoController, '/transacao')
+    api.add_resource(AtivosController, '/ativos')
+    
+    # Adicione o novo recurso à rota raiz ("/")
+    api.add_resource(ConnectionResource, '/')
+    api.add_resource(IngestData, '/ingest')
+
+    #api.add_resource(IngestData, '/oie')
+
     return app
