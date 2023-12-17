@@ -34,23 +34,19 @@ class IngestData(Resource):
 
             if not existing_ativo:
                 self.adicionar_ativo(ticker, entry.get("classe"), tickers_adicionados, tickers_no_mesmo_payload)
-
+                
             self.adicionar_transacao(ticker, entry, transacoes_registradas)
 
         # Após o loop, processar as transações
         transacao_service = TransacaoService()
-        respostas = [transacao_service.processar_transacao(transacao, AtivosModel.objects(ticker=transacao["ticker"]).first()) for transacao in transacoes_registradas]
+        respostas = [transacao_service.processar_transacao(transacao, AtivosModel.objects(ticker=transacao["ticker"]).first()) 
+                     for transacao in transacoes_registradas]
 
         return {
             "tickers_adicionados": tickers_adicionados,
             "transacoes_registradas": transacoes_registradas,
             "respostas_processamento": respostas
         }, 201
-
-
-
-
-
 
 
 
@@ -64,9 +60,6 @@ class IngestData(Resource):
         except Exception as e:
             print(f"Erro ao adicionar ativo {ticker}: {str(e)}")
 
-
-
-            
 
     def adicionar_transacao(self, ticker, entry, transacoes_registradas):
         nova_transacao = TransacaoModel(
