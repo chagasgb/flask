@@ -5,10 +5,9 @@ from ..models.transacao_model import TransacaoModel
 class TransacaoService:
     def processar_transacao(self, nova_transacao, ticker_existente=None):
         if nova_transacao.get('operacao') == 'compra':
-
-            quantidade = Decimal(str(nova_transacao.get('quantidade', 0)))
-            preco_unitario = Decimal(str(nova_transacao.get('preco_unitario', 0)))
             
+            quantidade = Decimal(nova_transacao.get('quantidade', 0))
+            preco_unitario = Decimal(nova_transacao.get('preco_unitario', 0))
             valor_operacao = quantidade * preco_unitario
 
             response = TransacaoModel(

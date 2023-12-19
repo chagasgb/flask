@@ -1,11 +1,11 @@
 from ..db import db
 
-from ..db import db
+from mongoengine import Document, StringField, DecimalField
 
-class TransacaoModel(db.Document):
-    ticker = db.StringField(required=True)
-    operacao = db.StringField(required=True)
-    # data_operacao = db.DateTimeField(required=True, format="%Y-%m-%d")
-    quantidade = db.FloatField(required=True)
-    preco_unitario = db.FloatField(required=True)
-    valor_operacao = db.FloatField(required=False, default=None)
+class TransacaoModel(Document):
+    ticker = StringField(required=True)
+    operacao = StringField(required=True)
+    # data_operacao = DateTimeField(required=True, format="%Y-%m-%d")
+    quantidade = DecimalField(required=True, precision=2)  # Ajuste a precisão conforme necessário
+    preco_unitario = DecimalField(required=True, precision=2)  # Ajuste a precisão conforme necessário
+    valor_operacao = DecimalField(required=False, default=None, precision=2)  # Ajuste a precisão conforme necessário
