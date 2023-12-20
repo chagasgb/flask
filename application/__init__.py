@@ -20,7 +20,7 @@ def create_app(config):
     api.add_resource(AtivosController, '/ativos')
     
     # Adicione o novo recurso à rota raiz ("/")
-    api.add_resource(ConnectionResource, '/')
+    api.add_resource(ConnectionResource, '/'), 200
     api.add_resource(IngestData, '/ingest')
 
     #api.add_resource(IngestData, '/oie')
